@@ -25,6 +25,110 @@ Analyzed over 38K loan applications, with $435M funded and $473M received.
 Really enjoyed working on this—it brought together finance, analytics, and storytelling in one place.
 
 Open to feedback or ideas—always learning!
+// =====================
+// KPI Measures
+// =====================
+
+AVG DTI = 
+AVERAGE('Fact _Loan'[dti])
+
+AVG Interest Rate = 
+AVERAGE('Fact _Loan'[int_rate])
+
+Total Loan Applications = 
+COUNT('Fact _Loan'[id])
+
+Total Funded Amount = 
+SUM('Fact _Loan'[loan_amount])
+
+Total Amount Received = 
+SUM('Fact _Loan'[total_payment])
+
+// =====================
+// Good vs Bad Loan Metrics
+// =====================
+
+Bad Loan Applications = 
+CALCULATE([Total Loan Applications], 'Fact _Loan'[Good vs Bad Loans] = "Bad Loan")
+
+Bad Loan Funded Amount = 
+CALCULATE([Total Funded Amount], 'Fact _Loan'[Good vs Bad Loans] = "Bad Loan")
+
+Bad Loan Received Amount = 
+CALCULATE([Total Amount Received], 'Fact _Loan'[Good vs Bad Loans] = "Bad Loan")
+
+Bad Loan % = 
+DIVIDE([Bad Loan Applications], [Total Loan Applications])
+
+Good Loan Applications = 
+CALCULATE([Total Loan Applications], 'Fact _Loan'[Good vs Bad Loans] = "Good Loan")
+
+Good Loan Funded Amount = 
+CALCULATE([Total Funded Amount], 'Fact _Loan'[Good vs Bad Loans] = "Good Loan")
+
+Good Loan Received Amount = 
+CALCULATE([Total Amount Received], 'Fact _Loan'[Good vs Bad Loans] = "Good Loan")
+
+Good Loan % = 
+DIVIDE([Good Loan Applications], [Total Loan Applications])
+
+// =====================
+// Month-over-Month Metrics
+// =====================
+
+MoM AVG DTI = 
+DIVIDE([MTD Avg DTI] - [PMTD AVG DTI], [PMTD AVG DTI])
+
+MoM Avg Interest Rate = 
+DIVIDE([MTD Avg Int Rate] - [PMTD Avg Int Rate], [PMTD Avg Int Rate])
+
+MoM Loan Applications = 
+DIVIDE([MTD Loan Application] - [PMTD Loan Application], [PMTD Loan Application])
+
+MoM Total Amount Received = 
+DIVIDE([MTD Received Amount] - [PMTD Total Amount Received], [PMTD Total Amount Received])
+
+MoM Total Funded Amount = 
+DIVIDE([MTD Funded Amount] - [PMTD Total Funded Amount], [PMTD Total Funded Amount])
+
+// =====================
+// MTD Metrics
+// =====================
+
+MTD Avg DTI = 
+CALCULATE([AVG DTI], TOTALMTD('Date Table'[Date]))
+
+MTD Avg Int Rate = 
+CALCULATE([AVG Interest Rate], TOTALMTD('Date Table'[Date]))
+
+MTD Funded Amount = 
+CALCULATE([Total Funded Amount], TOTALMTD('Date Table'[Date]))
+
+MTD Loan Application = 
+CALCULATE([Total Loan Applications], TOTALMTD('Date Table'[Date]))
+
+MTD Received Amount = 
+CALCULATE([Total Amount Received], TOTALMTD('Date Table'[Date]))
+
+// =====================
+// PMTD Metrics
+// =====================
+
+PMTD AVG DTI = 
+CALCULATE([AVG DTI], DATESMTD(DATEADD('Date Table'[Date], -1, MONTH)))
+
+PMTD Avg Int Rate = 
+CALCULATE([AVG Interest Rate], DATESMTD(DATEADD('Date Table'[Date], -1, MONTH)))
+
+PMTD Loan Application = 
+CALCULATE([Total Loan Applications], DATESMTD(DATEADD('Date Table'[Date], -1, MONTH)))
+
+PMTD Total Amount Received = 
+CALCULATE([Total Amount Received], DATESMTD(DATEADD('Date Table'[Date], -1, MONTH)))
+
+PMTD Total Funded Amount = 
+CALCULATE([Total Funded Amount], DATESMTD(DATEADD('Date Table'[Date], -1, MONTH)))
+
 
 #PowerBI #DataAnalytics #Finance #LoanAnalysis #DashboardDesign #DataStorytelling #StarSchema #DataModeling #MohamedElsaadi
 
