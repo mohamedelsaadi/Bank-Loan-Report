@@ -26,7 +26,7 @@ Really enjoyed working on this—it brought together finance, analytics, and sto
 
 Open to feedback or ideas—always learning!
 // =====================
-// # KPI Measures
+ # KPI Measures
 // =====================
 
 AVG DTI = 
@@ -45,7 +45,7 @@ Total Amount Received =
 SUM('Fact _Loan'[total_payment])
 
 // =====================
-// # Good vs Bad Loan Metrics
+ # Good vs Bad Loan Metrics
 // =====================
 
 Bad Loan Applications = 
@@ -73,7 +73,7 @@ Good Loan % =
 DIVIDE([Good Loan Applications], [Total Loan Applications])
 
 // =====================
-// # Month-over-Month Metrics
+ # Month-over-Month Metrics
 // =====================
 
 MoM AVG DTI = 
@@ -92,7 +92,7 @@ MoM Total Funded Amount =
 DIVIDE([MTD Funded Amount] - [PMTD Total Funded Amount], [PMTD Total Funded Amount])
 
 // =====================
-// # MTD Metrics
+# MTD Metrics
 // =====================
 
 MTD Avg DTI = 
@@ -111,7 +111,7 @@ MTD Received Amount =
 CALCULATE([Total Amount Received], TOTALMTD('Date Table'[Date]))
 
 // =====================
-// # PMTD Metrics
+ # PMTD Metrics
 // =====================
 
 PMTD AVG DTI = 
